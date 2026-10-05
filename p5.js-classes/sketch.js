@@ -1,15 +1,48 @@
 // use to store all shapes
 let allShapes = []
+let buttons = [];
+let ghosts = [];
 let prevMouseX, prevMouseY;
 
 function setup() {
-  rectMode(CENTER);
   createCanvas(innerWidth, innerHeight);
+  
+  for (var i = 0; i < 10; i++) {
+    ghosts.push(new ghosts());
+  }
+
+  let offset = ((width - SoundButton.Width * 6) / 2)
+
+  for (let i = 0; i < 6; i++) {
+    let button = new SoundButton(
+      i,
+      (i * SoundButton.Width) + offset,
+      height - SoundButton.Height,
+      color(random(255), random(255), random(255)));
+
+    buttons.push(button);
+  }
+
+  _renderer.canvas.addEventListener("soundButtonPressed", placeShape)
+
+  function placeShape(event) {
+    let buttonCircle = new Circle(
+      event.detail.x,
+      event.detail.y,
+      random(20, 100),
+      event.detail.colour,
+      random(2000, 15000),
+      random(-2, 2), random(-2, 2))
+
+    allShapes.push(buttonCircle)
+  }
 }
 
+// ===================================================================================================================
+
 function draw() {
-  // Process interaction
-  if(mouseIsPressed) {
+  // Process interaction----------------------------------------------------------------------------------------------
+  if (mouseIsPressed) {
     // resolve difference between this frame and last frame 
     let dx = mouseX - prevMouseX;
     let dy = mouseY - prevMouseY;
@@ -20,9 +53,9 @@ function draw() {
 
     let myShape = new Circle(
       // x and y position of the circle
-      mouseX, mouseY, 
+      mouseX, mouseY,
       // size
-      random(10, 150), 
+      random(10, 150),
       // colour
       color(random(200, 255), random(100, 200), random(150, 255)),
       // lifetime in milliseconds
@@ -34,24 +67,38 @@ function draw() {
     allShapes.push(myShape);
   }
 
-  // Process updates
-   for(let i =0; i < allShapes.length; i++){
+  // Process updates----------------------------------------------------------------------------------------------
+  for (let i = 0; i < allShapes.length; i++) {
     allShapes[i].update()
-    if(allShapes[i].dead){
+    if (allShapes[i].dead) {
       allShapes.splice(i, 1);
       i--;
     }
-  };
+  }
+
+  // update buttons
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].update();
+  }
 
   // track previous framees mouse position
   prevMouseX = mouseX;
   prevMouseY = mouseY;
 
-  // Render (draw)
+  // Render (draw)------------------------------------------------------------------------------------------------
   // Draw background first!
   background(220);
   // loop through all shapes and draw them
-  for(let i =0; i < allShapes.length; i++){
+  for (let i = 0; i < allShapes.length; i++) {
     allShapes[i].draw()
   };
+  // loop through all buttons and draw them
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].draw()
+  }
+
+  for (const ghost of ghosts) {
+    ghost.moveAndDraw();
+  }
+  
 }
