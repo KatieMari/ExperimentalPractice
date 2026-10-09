@@ -6,9 +6,15 @@ let prevMouseX, prevMouseY;
 
 function setup() {
   createCanvas(innerWidth, innerHeight);
-  
-  for (var i = 0; i < 10; i++) {
-    ghosts.push(new ghosts());
+
+  for (let i = 0; i < Ghost.Count; i++) {
+    let ghost = new Ghost(
+      random(width),
+      random(height),
+      random(10, 100),
+      color(random(200, 255), random(100, 200), random(150, 255)));
+
+    ghosts.push(ghost);
   }
 
   let offset = ((width - SoundButton.Width * 6) / 2)
@@ -18,7 +24,7 @@ function setup() {
       i,
       (i * SoundButton.Width) + offset,
       height - SoundButton.Height,
-      color(random(255), random(255), random(255)));
+      color(random(200, 255), random(100, 200), random(150, 255)));
 
     buttons.push(button);
   }
@@ -81,6 +87,11 @@ function draw() {
     buttons[i].update();
   }
 
+  // update ghosts
+  for (let i = 0; i < ghosts.length; i++) {
+    ghosts[i].update();
+  }
+
   // track previous framees mouse position
   prevMouseX = mouseX;
   prevMouseY = mouseY;
@@ -97,8 +108,9 @@ function draw() {
     buttons[i].draw()
   }
 
-  for (const ghost of ghosts) {
-    ghost.moveAndDraw();
+  // loop through all ghosts and draw them
+  for (let i = 0; i < ghosts.length; i++) {
+    ghosts[i].draw()
   }
-  
+
 }
