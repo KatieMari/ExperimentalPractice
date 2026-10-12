@@ -1,71 +1,82 @@
 class Ghost {
+  static Count = 15;
+  static TailLength = 30;
 
-    constructor() {
-        this.tail = [];
-        this.tailLength = 30;
+  x;
+  y;
+  size;
+  fillColour;
+  cosOffset;
+  wiggliness;
+  floatiness;
+  tail;
 
-        // Give this ghost a random size and starting position.
-        this.ghostSize = random(10, 100);
-        this.ghostX = random(width);
-        this.ghostY = random(height);
+  constructor(x, y, size, fillColour) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.fillColour = fillColour;
 
-        // These variables are used to make the ghosts
-        // follow different paths.
-        // Try changing these numbers!
-        this.cosOffset = random(100);
-        this.wiggliness = random(2, 10);
-        this.floatiness = random(2, 10);
+    this.cosOffset = random(200);
+    this.wiggliness = random(2, 10);
+    this.floatiness = random(2, 10);
 
-
-        // Give this ghost a random color.
-        this.r = random(255);
-        this.g = random(255);
-        this.b = random(255);
+    this.tail = [];
+  }
 
 
+  // ========================================================================
+
+  update() {
+    // move the ghost left and right
+    this.x += cos((this.cosOffset + frameCount) / 10) * this.wiggliness;
+    // move the ghost up 
+    this.y -= this.floatiness;
+
+    // if the ghost goes off the top, start it back at the bottom 
+    if (this.y < -this.size) {
+      this.y = height + this.size;
+      // clear the tail so it doesnt stretch across the whole screen
+      this.tail = [];
     }
 
-    moveAndDraw() {
-
-        // Move the ghost left and right.
-        this.ghostX += cos((this.cosOffset + frameCount) / 10) * this.wiggliness;
-        // Move the ghost up.
-        this.ghostY -= this.floatiness;
-        // If this ghost goes off the top, start it back at the bottom.
-        if (this.ghostY < -this.ghostSize) {
-          this.ghostY = height + this.ghostSize;
-        }
-
-        // Add a point to the beginning of the array.
-        this.tail.unshift({x: this.ghostX, y: this.ghostY});
-        // If the array is too big, remove the last point.
-        if (this.tail.length > this.tailLength) {
-          this.tail.pop();
-        }
-
-
-        // Loop over the tail and draw the points.
-        for (let index = 0; index < this.tail.length; index++) {
-          const tailPoint = this.tail[index];
-
-          // Tail gets smaller and more transparent.
-          const pointSize = this.ghostSize * (this.tail.length - index) / this.tail.length;
-          const pointAlpha = 255 * (this.tail.length - index) / this.tail.length;
-
-          fill(this.r, this.g, this.b, pointAlpha);
-          ellipse(tailPoint.x, tailPoint.y, pointSize);
-        }
-
-        // Draw this ghost's face. O_O
-        fill(32);
-        ellipse(this.ghostX - this.ghostSize * .2,
-                this.ghostY - this.ghostSize * .1,
-                this.ghostSize * .2);
-        ellipse(this.ghostX + this.ghostSize * .2,
-                this.ghostY - this.ghostSize * .1,
-                this.ghostSize * .2);
-        ellipse(this.ghostX,
-                this.ghostY + this.ghostSize * .2,
-                this.ghostSize * .2);
+    // add the current position to the front of the tail
+    this.tail.unshift({ x: this.x, y: this.y });
+    // if the tail is too long, remove the oldest point
+    if (this.tail.length > Ghost.TailLength) {
+      this.tail.pop();
     }
+  }
+
+  // ============================================================================
+  draw() {
+    noStroke();
+    this.drawTail();
+    this.drawFace();
+  }
+
+  // ============================================================================
+  drawTail() {
+    let r = red(this.fillColour);
+    let g = green(this.fillColour);
+    let b = blue(this.fillColour);
+
+    for (let i = 0; i < this.tail.length; i++) {
+      // ratio of 1 to 0 from head to end of tail
+      let ratio = (this.tail.length - i) / this.tail.length;
+
+      // tail gets smaller and more transparent
+      fill(r, g, b, 255 * ratio);
+      ellipse(this.tail[i].x, this.tail[i].y, this.size * ratio);
+    }
+  }
+
+  // =============================================================================
+  drawFace() {
+    let featureSize = this.size * 0.2;
+    fill(32)
+    ellipse(this.x - this.size * 0.2, this.y - this.size * 0.1, featureSize);
+    ellipse(this.x + this.size * 0.2, this.y - this.size * 0.1, featureSize);
+    ellipse(this.x, this.y + this.size * 0.2, featureSize);
+  }
 }
