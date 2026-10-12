@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Phaser Tiled Demo</title>
+
+    <script src="lib/phaser.min.js"> </script>
+    <script src="scenes/Scene1.js"> </script>
+    <script>
+        const config = {
+            type: Phaser.AUTO,
+            width: 2816, 
+            height: 1280,
+            scene: Scene1,
+            scale: {
+                mode: Phaser.Scale.FIT,
+                autoCenter: Phaser.Scale.CENTER_BOTH
+            },
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 2180 },
+                    debug: true,
+                    overlapBias: 8, //maybe required for larger tiles
+                    tileBias: 32 // maybe required for larger tiles
+
+                }
+            }
+        }
+
+        const game = new Phaser.Game(config);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
