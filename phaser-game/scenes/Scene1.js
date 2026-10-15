@@ -32,7 +32,7 @@ class Scene1 extends Phaser.Scene {
     });
 
     // load background
-    this.load.image("background1", "phaser-game/png/elements/background.png");
+    this.load.image("background1", "png/elements/background.png");
   }
 
   create() {
@@ -41,7 +41,10 @@ class Scene1 extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 2816, 1280);
 
     // create backgrounds
-    this.add.image(1440, 500, "background1");
+    this.add
+      .image(0, 0, "background1")
+      .setOrigin(0, 0)
+      .setDisplaySize(2816, 1883);
 
     // create map based on tiled json file
     this.map = this.make.tilemap({ key: "scene1map" });
@@ -50,6 +53,7 @@ class Scene1 extends Phaser.Scene {
     this.tiles = [
       this.map.addTilesetImage("AutumnPlatform", "autumn-01"),
       this.map.addTilesetImage("02", "autumn-02"),
+      this.map.addTilesetImage("03", "autumn-03"),
       this.map.addTilesetImage("04", "autumn-04"),
       this.map.addTilesetImage("05", "autumn-05"),
       this.map.addTilesetImage("10", "autumn-10"),
@@ -60,10 +64,11 @@ class Scene1 extends Phaser.Scene {
     this.platforms = this.map.createLayer("platforms", this.tiles);
 
     // sets up collision
-    this.map.setCollisionBetween(0, 9999);
+    this.map.setCollisionByExclusion([-1, 131, 132]);
 
     this.player = this.physics.add.sprite(128, 500, "cat");
     this.player.setScale(4);
+    this.player.body.setSize(22, 18).setOffset(5, 7);
     this.player.setCollideWorldBounds(true);
     this.physics.add.collider(this.player, this.platforms);
 
@@ -77,7 +82,7 @@ class Scene1 extends Phaser.Scene {
 
     this.anims.create({
       key: "idle",
-      frames: this.anims.generateFrameNumbers("cat", { start: 0, end: 5 }),
+      frames: this.anims.generateFrameNumbers("cat", { start: 3, end: 3 }),
       frameRate: 6,
       repeat: -1,
     });

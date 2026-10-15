@@ -3,58 +3,52 @@
  <editorsettings>
   <export target="scene1map.tmj" format="json"/>
  </editorsettings>
- <tileset firstgid="1" name="platforms" tilewidth="128" tileheight="128" tilecount="64" columns="8">
-  <image source="../Tiles/tiles_1024_128x128.png" width="1024" height="1024"/>
+ <tileset firstgid="1" name="AutumnPlatform" tilewidth="128" tileheight="128" tilecount="16" columns="4">
+  <image source="../png/tiles/01.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="65" name="AutumnPlatform" tilewidth="128" tileheight="128" tilecount="16" columns="4">
-  <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/01.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="81" name="02" tilewidth="128" tileheight="128" tilecount="16" columns="4">
+ <tileset firstgid="17" name="02" tilewidth="128" tileheight="128" tilecount="16" columns="4">
   <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/02.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="97" name="04" tilewidth="128" tileheight="128" tilecount="16" columns="4">
+ <tileset firstgid="33" name="04" tilewidth="128" tileheight="128" tilecount="16" columns="4">
   <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/04.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="113" name="05" tilewidth="128" tileheight="128" tilecount="16" columns="4">
-  <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/05.png" width="512" height="512"/>
+ <tileset firstgid="49" name="11" tilewidth="128" tileheight="128" tilecount="8" columns="4">
+  <image source="../png/tiles/11.png" width="512" height="256"/>
  </tileset>
- <tileset firstgid="129" name="10" tilewidth="128" tileheight="128" tilecount="8" columns="4">
-  <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/10.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="137" name="11" tilewidth="128" tileheight="128" tilecount="8" columns="4">
-  <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/11.png" width="512" height="256"/>
+ <tileset firstgid="57" name="03" tilewidth="128" tileheight="128" tilecount="16" columns="4">
+  <image source="../png/tiles/03.png" width="512" height="512"/>
  </tileset>
  <layer id="1" name="platforms" width="22" height="10">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,81,82,83,0,0,0,
-0,0,81,82,83,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,137,138,139,140,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,141,142,143,144,0,0,0,113,114,115,116,81,82,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,117,118,119,120,71,72,
-137,138,139,140,129,130,131,132,0,0,113,114,115,0,0,0,121,122,123,124,67,68,
-141,142,143,144,133,134,135,136,0,0,117,118,0,0,0,0,125,126,127,128,71,72,
-65,66,67,68,65,66,67,68,137,138,139,140,137,138,139,140,73,74,75,76,75,76,
-69,70,71,72,69,70,71,72,141,142,143,144,141,142,143,144,77,78,79,80,79,80
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,34,
+33,34,0,0,0,0,0,0,0,0,0,0,0,0,49,50,51,52,0,0,0,0,
+0,0,0,0,0,49,50,51,52,0,0,0,0,0,53,54,55,56,0,0,0,0,
+0,0,0,0,0,53,54,55,56,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,18,19,20,
+57,58,59,60,0,0,0,0,0,0,0,0,0,0,33,34,35,36,21,22,23,24,
+61,62,63,64,49,50,51,52,49,50,51,52,49,50,37,38,39,40,25,26,27,28,
+65,66,67,68,53,54,55,56,53,54,55,56,53,54,41,42,43,44,29,30,31,32
 </data>
  </layer>
  <objectgroup id="2" name="pickups">
-  <object id="1" x="448" y="186">
+  <object id="1" x="56" y="226">
    <point/>
   </object>
-  <object id="2" x="1350" y="320">
+  <object id="2" x="952" y="338">
    <point/>
   </object>
-  <object id="3" x="2242" y="64">
+  <object id="3" x="1986" y="206">
    <point/>
   </object>
-  <object id="4" x="180" y="630">
+  <object id="4" x="222" y="850">
    <point/>
   </object>
-  <object id="5" x="2734" y="378">
+  <object id="5" x="2756" y="110">
    <point/>
   </object>
-  <object id="7" x="1978" y="974">
+  <object id="7" x="1998" y="850">
    <point/>
   </object>
  </objectgroup>
