@@ -1,23 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="22" height="10" tilewidth="128" tileheight="128" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="22" height="10" tilewidth="128" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="8">
  <editorsettings>
   <export target="scene1map.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="platforms" tilewidth="128" tileheight="128" tilecount="64" columns="8">
   <image source="../Tiles/tiles_1024_128x128.png" width="1024" height="1024"/>
  </tileset>
+ <tileset firstgid="65" name="AutumnPlatform" tilewidth="128" tileheight="128" tilecount="16" columns="4">
+  <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/01.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="81" name="02" tilewidth="128" tileheight="128" tilecount="16" columns="4">
+  <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/02.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="97" name="04" tilewidth="128" tileheight="128" tilecount="16" columns="4">
+  <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/04.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="113" name="05" tilewidth="128" tileheight="128" tilecount="16" columns="4">
+  <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/05.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="129" name="10" tilewidth="128" tileheight="128" tilecount="8" columns="4">
+  <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/10.png" width="512" height="256"/>
+ </tileset>
+ <tileset firstgid="137" name="11" tilewidth="128" tileheight="128" tilecount="8" columns="4">
+  <image source="../../../../../../Downloads/craftpix-224924-platformer-autumn-game-tileset/png/tiles/11.png" width="512" height="256"/>
+ </tileset>
  <layer id="1" name="platforms" width="22" height="10">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,55,55,55,55,58,0,0,0,0,0,0,0,0,0,0,0,0,28,10,10,
-0,0,0,52,33,33,0,0,58,18,13,0,0,0,0,0,0,16,10,39,36,37,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,35,41,44,45,
-0,0,0,0,0,0,0,0,0,0,0,0,16,57,58,32,54,34,33,17,40,60,
-0,0,0,0,0,0,0,0,0,57,29,24,55,33,41,41,41,17,17,33,46,39,
-0,0,0,0,0,0,0,16,57,41,41,42,25,61,42,61,41,36,37,34,34,35,
-0,0,0,0,24,28,31,55,34,25,25,33,25,25,34,34,34,44,45,27,34,17,
-30,10,10,10,17,17,17,17,25,34,34,42,25,17,53,53,17,17,17,17,17,17
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,81,82,83,0,0,0,
+0,0,81,82,83,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,137,138,139,140,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,141,142,143,144,0,0,0,113,114,115,116,81,82,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,117,118,119,120,71,72,
+137,138,139,140,129,130,131,132,0,0,113,114,115,0,0,0,121,122,123,124,67,68,
+141,142,143,144,133,134,135,136,0,0,117,118,0,0,0,0,125,126,127,128,71,72,
+65,66,67,68,65,66,67,68,137,138,139,140,137,138,139,140,73,74,75,76,75,76,
+69,70,71,72,69,70,71,72,141,142,143,144,141,142,143,144,77,78,79,80,79,80
 </data>
  </layer>
+ <objectgroup id="2" name="pickups">
+  <object id="1" x="448" y="186">
+   <point/>
+  </object>
+  <object id="2" x="1350" y="320">
+   <point/>
+  </object>
+  <object id="3" x="2242" y="64">
+   <point/>
+  </object>
+  <object id="4" x="180" y="630">
+   <point/>
+  </object>
+  <object id="5" x="2734" y="378">
+   <point/>
+  </object>
+  <object id="7" x="1978" y="974">
+   <point/>
+  </object>
+ </objectgroup>
 </map>
