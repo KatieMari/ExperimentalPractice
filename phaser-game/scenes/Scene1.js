@@ -34,7 +34,10 @@ class Scene1 extends Phaser.Scene {
     // load background
     this.load.image("background1", "png/elements/background.png");
 
-    this.load.image("cake", "pickups/cute-cakesa.png");
+    this.load.spritesheet("cake", "pickups/cute-cakesa.png", {
+      frameWidth: 39,
+      frameHeight: 34,
+    });
   }
 
   create() {
@@ -83,8 +86,17 @@ class Scene1 extends Phaser.Scene {
 
     // add the cake to the physics group
     this.pickups.addMultiple(cakes);
+    cakes.forEach((cake) =>
+      cake.setFrame(Phaser.Math.Between(0, 2)).setScale(2),
+    );
     this.physics.add.collider(this.pickups, this.platforms);
-    this.physics.add.overlap(this.player, this.pickups, this.collectPickup, null, this);
+    this.physics.add.overlap(
+      this.player,
+      this.pickups,
+      this.collectPickup,
+      null,
+      this,
+    );
 
     // animations
     this.anims.create({
@@ -109,12 +121,12 @@ class Scene1 extends Phaser.Scene {
     );
   }
 
+  collectPickup(player, pickup) {
+    pickup.destroy();
+  }
+
   update() {
     // updates game elements each frame
-
-    collectPickup(this.player, pickup){
-        pickup.destroy()
-    }
 
     // negate player x force
     this.player.body.setVelocityX(0);
