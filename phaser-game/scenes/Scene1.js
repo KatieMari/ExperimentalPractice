@@ -6,6 +6,7 @@ class Scene1 extends Phaser.Scene {
   cursors;
   keysWASD;
   spacebar;
+  pickups;
 
   constructor() {
     // register scene with game engine
@@ -17,9 +18,8 @@ class Scene1 extends Phaser.Scene {
     // load tile assets - first param = Phaser 'key', 2nd param = path to file
     this.load.image("autumn-01", "png/tiles/01.png");
     this.load.image("autumn-02", "png/tiles/02.png");
+    this.load.image("autumn-03", "png/tiles/03.png");
     this.load.image("autumn-04", "png/tiles/04.png");
-    this.load.image("autumn-05", "png/tiles/05.png");
-    this.load.image("autumn-10", "png/tiles/10.png");
     this.load.image("autumn-11", "png/tiles/11.png");
 
     // load JSON map, params as above
@@ -33,11 +33,13 @@ class Scene1 extends Phaser.Scene {
 
     // load background
     this.load.image("background1", "png/elements/background.png");
+
+    this.load.image("cake", "pickups/cute-cakesa.png");
   }
 
   create() {
     // place items on screen
-
+    this.cameras.main.setBounds(0, 0, 2816, 1280);
     this.physics.world.setBounds(0, 0, 2816, 1280);
 
     // create backgrounds
@@ -55,8 +57,6 @@ class Scene1 extends Phaser.Scene {
       this.map.addTilesetImage("02", "autumn-02"),
       this.map.addTilesetImage("03", "autumn-03"),
       this.map.addTilesetImage("04", "autumn-04"),
-      this.map.addTilesetImage("05", "autumn-05"),
-      this.map.addTilesetImage("10", "autumn-10"),
       this.map.addTilesetImage("11", "autumn-11"),
     ];
 
@@ -64,13 +64,27 @@ class Scene1 extends Phaser.Scene {
     this.platforms = this.map.createLayer("platforms", this.tiles);
 
     // sets up collision
-    this.map.setCollisionByExclusion([-1, 131, 132]);
+    this.map.setCollisionByExclusion([-1]);
 
     this.player = this.physics.add.sprite(128, 500, "cat");
+    this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
     this.player.setScale(4);
     this.player.body.setSize(22, 18).setOffset(5, 7);
     this.player.setCollideWorldBounds(true);
     this.physics.add.collider(this.player, this.platforms);
+
+    // creates a pickup
+    this.pickups = this.physics.add.group();
+
+    // add a cake for each point in the object layer 'pickups'
+    const cakes = this.map.createFromObjects("pickups", {
+      key: "cake",
+    });
+
+    // add the cake to the physics group
+    this.pickups.addMultiple(cakes);
+    this.physics.add.collider(this.pickups, this.platforms);
+    this.physics.add.overlap(this.player, this.pickups, this.collectPickup, null, this);
 
     // animations
     this.anims.create({
@@ -97,6 +111,10 @@ class Scene1 extends Phaser.Scene {
 
   update() {
     // updates game elements each frame
+
+    collectPickup(this.player, pickup){
+        pickup.destroy()
+    }
 
     // negate player x force
     this.player.body.setVelocityX(0);
