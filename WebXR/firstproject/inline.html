@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple WebXR</title>
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-camera>
+            <a-entity cursor="rayOrigin: mouse" raycaster="objects: .interactive"></a-entity>
+        </a-camera>
+        <a-box class="interactive" position="-1 0.5 -3" rotation="0 45 0" color="pink" event-set__down="_event: mousedown; material.color: powderBlue"></a-box>
+        <a-sphere class="interactive" position="0 1.25 -5" radius="1.25" color="lavenderBlush" event-set__down="_event: mousedown; material.color: skyBlue"></a-sphere>
+        <a-cylinder class="interactive"position="1 0.75 -3" radius="0.5" height="1.5" color="paleVioletRed" event-set__down="_event: mousedown; material.color: aliceBlue"></a-cylinder>
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="thistle"></a-plane>
+        <a-sky color="rosyBrown"></a-sky>
+    </a-scene>
+
+</body>
+
+</html>
