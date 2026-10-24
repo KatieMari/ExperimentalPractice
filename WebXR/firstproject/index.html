@@ -26,6 +26,10 @@
                 el.addEventListener('mouseleave', function () {
                     el.setAttribute('color', defaultColour);
                 })
+                el.addEventListener('click', function () {
+                    el.components.sound.stopSound();
+                    el.components.sound.playSound();
+                })
 
             }
         })
@@ -35,9 +39,9 @@
 <body>
     <a-scene>
         <a-assets>
-            <audio id="box-sound" src="sounds/box.mp3.mp3" preload="auto"></audio>
-            <audio id="sphere-sound" src="sounds/sphere.mp3.mp3" preload="auto"></audio>
-            <audio id="cylinder-sound" src="sounds/cylinder.mp3.wav" preload="auto"></audio>
+            <audio id="box-sound" src="sounds/box.mp3" preload="auto"></audio>
+            <audio id="sphere-sound" src="sounds/sphere.mp3" preload="auto"></audio>
+            <audio id="cylinder-sound" src="sounds/cylinder.wav" preload="auto"></audio>
         </a-assets>
         <a-camera>
             <a-entity cursor="rayOrigin: mouse" raycaster="objects: .interactive"></a-entity>
@@ -46,11 +50,11 @@
         <a-entity laser-controls="hand: left" raycaster="objects: .interactive"></a-entity>
         <a-entity laser-controls="hand: right" raycaster="objects: .interactive"></a-entity>
 
-        <a-box toggle-colour="colour: powderBlue" class="interactive" position="-1 0.5 -3" rotation="0 45 0"
+        <a-box sound="src: #box-sound" toggle-colour="colour: powderBlue" class="interactive" position="-1 0.5 -3" rotation="0 45 0"
             color="pink"></a-box>
-        <a-sphere toggle-colour="colour: steelBlue" class="interactive" position="0 1.25 -5" radius="1.25"
+        <a-sphere sound="src: #sphere-sound" toggle-colour="colour: steelBlue" class="interactive" position="0 1.25 -5" radius="1.25"
             color="lavenderBlush"></a-sphere>
-        <a-cylinder toggle-colour="colour: aliceBlue" class="interactive" position="1 0.75 -3" radius="0.5" height="1.5"
+        <a-cylinder sound="src: #cylinder-sound" toggle-colour="colour: aliceBlue" class="interactive" position="1 0.75 -3" radius="0.5" height="1.5"
             color="paleVioletRed"></a-cylinder>
 
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="thistle"></a-plane>
