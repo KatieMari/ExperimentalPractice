@@ -39,6 +39,36 @@
 
             }
         })
+
+        AFRAME.registerComponent('sound-react', {
+            schema: {
+                strength: { type: 'number', default: '1'}
+            },
+            tick: function () {
+                const sound = this.el.components.sound;
+                //  this.analyser stores the analyser on the component, so its only created once rather than 72 times per second
+                if (!this.analyser) {
+                    //  return leaves tick early for this frame, A-Frame tries again on the next one
+                    if (!sound || sound.pool.children.length === 0) return;
+                    // THREE is the 3D library underneath A-Frame
+                    // 32 is the analysers detail level called fftSize
+                    this.analyser = new THREE.AudioAnalyser(sound.pool.children[0], 256);
+                }
+
+                const level = this.analyser.getAverageFrequency();
+                const size = 1 + (level /  255) * this.data.strength;
+                console.log(level);
+
+                // this.el.object3D.scale.set(size, size, size);
+
+                // test
+                if (this.current === undefined) this.current = 1;
+                this.current += (size - this.current) * 0.2;
+                this.el.object3D.scale.set(this.current, this.current, this.current);
+                
+
+            }
+        })
     </script>
 </head>
 
@@ -56,11 +86,11 @@
         <a-entity laser-controls="hand: left" raycaster="objects: .interactive"></a-entity>
         <a-entity laser-controls="hand: right" raycaster="objects: .interactive"></a-entity>
 
-        <a-box sound="src: #box-sound; loop:true; refDistance: 2.5" toggle-colour="colour: powderBlue" class="interactive" position="-1 0.5 -3" rotation="0 45 0"
+        <a-box sound="src: #box-sound; loop:true; refDistance: 2.5" sound-react="strength: 3" toggle-colour="colour: powderBlue" class="interactive" position="-1 0.5 -3" rotation="0 45 0"
             color="pink"></a-box>
-        <a-sphere sound="src: #sphere-sound; loop:true; rolloffFactor: 2" toggle-colour="colour: steelBlue" class="interactive" position="0 1.25 -5" radius="1.25"
+        <a-sphere sound="src: #sphere-sound; loop:true; rolloffFactor: 2" sound-react="strength: 1" toggle-colour="colour: steelBlue" class="interactive" position="0 1.25 -5" radius="1.25"
             color="lavenderBlush"></a-sphere>
-        <a-cylinder sound="src: #cylinder-sound; loop:true; distanceModel: linear; maxDistance: 5" toggle-colour="colour: aliceBlue" class="interactive" position="1 0.75 -3" radius="0.5" height="1.5"
+        <a-cylinder sound="src: #cylinder-sound; loop:true; distanceModel: linear; maxDistance: 5" sound-react="strength: 1.5" toggle-colour="colour: aliceBlue" class="interactive" position="1 0.75 -3" radius="0.5" height="1.5"
             color="paleVioletRed"></a-cylinder>
 
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="thistle"></a-plane>
