@@ -42,26 +42,27 @@
 
         AFRAME.registerComponent('sound-react', {
             schema: {
-                strength: { type: 'number', default: '1'}
+                strength: { type: 'number', default: 1}
             },
             tick: function () {
+                //  get the sound component 
                 const sound = this.el.components.sound;
-                //  this.analyser stores the analyser on the component, so its only created once rather than 72 times per second
+                //  only make the analyser once, not every frame
                 if (!this.analyser) {
-                    //  return leaves tick early for this frame, A-Frame tries again on the next one
+                    //  sound isn't ready yet so skip this frame and try again the next one
                     if (!sound || sound.pool.children.length === 0) return;
-                    // THREE is the 3D library underneath A-Frame
-                    // 32 is the analysers detail level called fftSize
-                    this.analyser = new THREE.AudioAnalyser(sound.pool.children[0], 256);
+                    // analyser measures the sound, 32 = number of samples
+                    this.analyser = new THREE.AudioAnalyser(sound.pool.children[0], 32);
                 }
 
+                // average loudness of the sound right now, 0 to 255
                 const level = this.analyser.getAverageFrequency();
+                // 1 = normal size, louder = bigger, strength controls how much it grows
                 const size = 1 + (level /  255) * this.data.strength;
 
-                // this.el.object3D.scale.set(size, size, size);
-
-                // test
                 if (this.current === undefined) this.current = 1;
+                // smoothing - moves 20% of the way to the new size each frame
+                // 0.2 balances the fluidity of 0.05 with the responsiveness of 0.8
                 this.current += (size - this.current) * 0.2;
                 this.el.object3D.scale.set(this.current, this.current, this.current);
                 
