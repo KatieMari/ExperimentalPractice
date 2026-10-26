@@ -55,11 +55,11 @@
         <a-entity laser-controls="hand: left" raycaster="objects: .interactive"></a-entity>
         <a-entity laser-controls="hand: right" raycaster="objects: .interactive"></a-entity>
 
-        <a-box sound="src: #box-sound; loop:true; refDistance: 3" toggle-colour="colour: powderBlue" class="interactive" position="-1 0.5 -3" rotation="0 45 0"
+        <a-box sound="src: #box-sound; loop:true; refDistance: 2.5" toggle-colour="colour: powderBlue" class="interactive" position="-1 0.5 -3" rotation="0 45 0"
             color="pink"></a-box>
-        <a-sphere sound="src: #sphere-sound; loop:true; positional: false" toggle-colour="colour: steelBlue" class="interactive" position="0 1.25 -5" radius="1.25"
+        <a-sphere sound="src: #sphere-sound; loop:true; rolloffFactor: 2" toggle-colour="colour: steelBlue" class="interactive" position="0 1.25 -5" radius="1.25"
             color="lavenderBlush"></a-sphere>
-        <a-cylinder sound="src: #cylinder-sound; loop:true; distanceModel: linear; maxDistance: 4" toggle-colour="colour: aliceBlue" class="interactive" position="1 0.75 -3" radius="0.5" height="1.5"
+        <a-cylinder sound="src: #cylinder-sound; loop:true; distanceModel: linear; maxDistance: 5" toggle-colour="colour: aliceBlue" class="interactive" position="1 0.75 -3" radius="0.5" height="1.5"
             color="paleVioletRed"></a-cylinder>
 
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="thistle"></a-plane>
