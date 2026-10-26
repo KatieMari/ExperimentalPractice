@@ -28,8 +28,9 @@
                 })
                 
                 el.addEventListener('click', function () {
+                    // a toggle. stops if it's playing, starts if its not
+                    // checks the sounds component's isPlaying
                     if (el.components.sound.isPlaying) {
-                        // stopSound first so fast clicks restart the sound instead of being ignored
                         el.components.sound.stopSound();
                     } else {
                         el.components.sound.playSound();
