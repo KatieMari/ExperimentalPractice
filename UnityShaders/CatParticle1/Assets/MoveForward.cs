@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class MoveForward : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public float speed = 1.5f;   // metres per second
 
-    // Update is called once per frame
     void Update()
     {
-        
+        // move along the cat's own forward direction, every frame
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 }
